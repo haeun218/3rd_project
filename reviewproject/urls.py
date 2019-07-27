@@ -30,4 +30,4 @@ urlpatterns = [
     path('diaryapp/postupdate/<int:post_id>', diaryapp.views.postupdate, name='postupdate'),
     path('diaryapp/postdelete/<int:post_id>', diaryapp.views.postdelete, name='postdelete'),
     path('userapp/', include('userapp.urls')),
-]+ static(setting.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
