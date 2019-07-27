@@ -1,0 +1,45 @@
+<title>main</title>
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for post in episodes %} <!--페이지-->
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title"><a href="{% url 'show' post.id %}">제목 : {{ post.title }}</a></h3> 
+            <h4 class="card-text">내용 : {{ post.summary }}</h4>
+            <h6>작성 날짜 : {{ post.created_at }}</h6>
+            <h6>수정 날짜 : {{ post.updated_at }}</h6>
+            <br/>
+        </div>
+    </div>
+
+{% endfor %}
+
+{#First Previous 3 of 4 Next Last#}
+
+{%if episodes.has_previous%}
+<a href="?page=1">First</a>
+<a href="?page={{episodes.previous_page_number}}">Previous</a>
+{%endif%}
+
+<span>{{episodes.number}}</span>
+<span>of</span>
+<span>{{episodes.paginator.num_pages}}</span>
+
+{%if episodes.has_next%}
+<a href="?page={{episodes.next_page_number}}">Next</a>
+<a href="?page={{episodes.paginator.num_pages}}">Last</a>
+{%endif%}
+
+<br>
+
+<button type="button" class="btn btn-outline-primary">
+    <a href="{% url 'postcreate' %}">새 글 쓰기</a>
+</button>
+</div>
+
+{%endblock%}
+

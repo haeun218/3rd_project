@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+<h3>제목 : {{ post.title }}</h3>
+        <p>{{ post.body }}</p>
+        <h6>작성 날짜 : {{ post.created_at }}</h6>
+        <h6>수정 날짜 : {{ post.updated_at }}</h6>
+
+        <button type="button" class="btn btn-outline-warning">
+            <a href="{% url 'main' %}">뒤로 가기</a>
+        </button>
+        <button type="button" class="btn btn-outline-primary">
+            <a href="{% url 'postcreate' %}">새 글 쓰기</a>
+        </button>
+        <button type="button" class="btn btn-outline-success">
+            <a href="{% url 'postupdate' post.id %}">수정하기</a>
+        </button>
+        <button type="button" class="btn btn-outline-danger">
+            <a href="{% url 'postdelete' post.id %}" onclick="return confirm('정말 삭제하시겠습니까?')">삭제하기</a>
+        </button>
+</div>
+{%endblock%}

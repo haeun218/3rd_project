@@ -1,0 +1,35 @@
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{% url 'main' %}">
+        <img src="https://avatars0.githubusercontent.com/u/19548196?s=200&v=4" width="30" height="30" alt="">
+        LIKE LION</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="{% url 'main' %}">Main</a>
+        {% if user.is_authenticated %}
+        <li class="nav-item dropdown">
+            <a class="dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false" style="text-align:center">환영합니다. {{ user.username }}님!</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="javascript:{document.getElementById('logout').submit()}">로그아웃</a>
+                <form id="logout" method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %} <input type="hidden" />
+                </form>
+            </div>
+        </li>
+        {% else %}
+        <a class="nav-item nav-link" href="{% url 'signup' %}">Sign up</a>
+        <a class="nav-item nav-link disabled" href="{% url 'login' %}">Login</a>
+        {% endif %}
+        </div>
+    </div>
+</nav>
+
+{% block content %}
+{% endblock %}
